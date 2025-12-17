@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Novamine Mini App</title>
+
+  <!-- Telegram Mini App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #020617, #0f172a);
+      color: #fff;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    h1 {
+      margin-top: 20px;
+      font-size: 32px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .balance {
+      font-size: 26px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    .tap-btn {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: none;
+      font-size: 22px;
+      font-weight: bold;
+      background: #22c55e;
+      color: #020617;
+    }
+    .small {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🚀 NOVAMINE</h1>
+    <p class="small">Tap to Earn Mini App</p>
+
+    <div class="card">
+      <p>Your Balance</p>
+      <div class="balance" id="balance">0 NOVA</div>
+
+      <button class="tap-btn" onclick="tap()">TAP</button>
+
+      <p class="small" style="margin-top:15px;">
+        Daily Tap Limit: 2000
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    let balance = 0;
+    let tapsToday = 0;
+    const DAILY_LIMIT = 2000;
+
+    function tap() {
+      if (tapsToday >= DAILY_LIMIT) {
+        tg.showAlert("Daily tap limit reached!");
+        return;
+      }
+      balance += 1;
+      tapsToday += 1;
+      document.getElementById("balance").innerText = balance + " NOVA";
+    }
+  </script>
+
+</body>
+</html>
